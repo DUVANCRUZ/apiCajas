@@ -1,19 +1,52 @@
-import database from "./database";
-import Cajas from "../models/Cajas"; 
-import Sedes from "../models/Sedes"; 
+import db from "./database";
+import Afiliado from "../models/Afiliado";
+import AfiliadoBeneficiario from "../models/AfiliadoBeneficiario";
+import Convenio from "../models/Convenio";
+import Planes from "../models/Planes";
+import Sede from "../models/Sede";
+import UserRoles from "../models/UserRoles";
+import Users from "../models/Users";
 
-// Define las relaciones entre los modelos
-Cajas.hasMany(Sedes, { foreignKey: "cajaId" });
-Sedes.belongsTo(Cajas, { foreignKey: "cajaId" });
+
+AfiliadoBeneficiario.belongsTo(Afiliado, {
+  foreignKey: 'id_afiliado_beneficiario',
+  as: 'Afiliado',
+  onDelete: 'CASCADE',
+});
+
+AfiliadoBeneficiario.belongsTo(Afiliado, {
+  foreignKey: 'id_afiliado_cotizante',
+  as: 'AfiliadoCotizante',
+  onDelete: 'CASCADE',
+});
+
+Convenio.belongsTo(Planes, {
+  foreignKey: 'id_plan',
+  onDelete: 'CASCADE',
+});
+
+Convenio.belongsTo(Afiliado, {
+  foreignKey: 'id_afiliado',
+  onDelete: 'CASCADE',
+});
+
+Convenio.belongsTo(Sede, {
+  foreignKey: 'id_sede',
+  onDelete: 'CASCADE',
+});
+
+Users.belongsTo(UserRoles, {
+  foreignKey: 'id_user_role',
+  onDelete: 'CASCADE',
+});
+
 
 // Sincroniza los modelos con la base de datos
-export function modelRelation() {
-    // Sincroniza los modelos con la base de datos
-    database.sync({ alter: true })
-      .then(() => {
-        console.log("Database synchronized successfully");
-      })
-      .catch((error) => {
-        console.error("Error synchronizing the database:", error);
-      });
+export async function modelRelation() {
+  try {
+    await db.sync();
+    console.log("Database synchronized successfully");
+  } catch (error) {
+    console.error("Error synchronizing the database:", error);
   }
+}

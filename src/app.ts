@@ -2,9 +2,9 @@
 import express, { json, Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
-import database from "./connections/database";
+import db from "./connections/database";
 import { modelRelation } from "./connections/modelRelation";
-
+import router from "./routes";
 
 export class App {
     private app: Application;
@@ -15,6 +15,7 @@ export class App {
         this.middlewares();
         this.dbConection();
         this.relationSync();
+        this.routes();
     
     }
 
@@ -35,12 +36,15 @@ export class App {
     }
 
     async dbConection(){
-        await database.authenticate();
+        await db.authenticate();
         console.log("Database conected");
 
     }
 
-    relationSync(){
+   relationSync(){
         modelRelation();
+    }
+    routes(){
+        this.app.use('/', router); 
     }
 }
