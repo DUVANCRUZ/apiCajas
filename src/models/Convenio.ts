@@ -11,36 +11,41 @@ const Convenio = database.define("Convenio", {
   id_sede: {
     type: DataTypes.INTEGER,
     allowNull: true,
+    defaultValue:null
   },
   id_afiliado: {
     type: DataTypes.INTEGER,
     allowNull: true,
+    defaultValue:null
   },
   id_plan: {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 1,
   },
-  activo: {
+  asignado: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
+    defaultValue: false
   },
   codigo: {
     type: DataTypes.STRING(30),
     allowNull: false,
     unique: true,
   },
-  num_doc_afiliado: {
-    type: DataTypes.STRING(12),
-    allowNull: true,
+  liberado: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   },
   tipo_tarifa: {
     type: DataTypes.STRING(20),
     allowNull: true,
+    defaultValue:null
   },
   fecha_registro: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue:null
   }
   },
   {

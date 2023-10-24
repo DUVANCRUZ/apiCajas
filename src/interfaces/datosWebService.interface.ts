@@ -4,5 +4,5 @@ export interface DatosWebService {
     afiliadoCorporativo: boolean;
     categoria: string;
     generoAfiliado: string;
-    fechaNacimiento: string;
+    fechaNacimiento: Date;
 }

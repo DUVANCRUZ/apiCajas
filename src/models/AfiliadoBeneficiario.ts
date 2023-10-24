@@ -11,6 +11,7 @@ const AfiliadoBeneficiario = database.define("Afiliado_Beneficiario", {
   id_afiliado_cotizante: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    unique: true
   },
   id_afiliado_beneficiario: {
     type: DataTypes.INTEGER,
@@ -20,7 +21,7 @@ const AfiliadoBeneficiario = database.define("Afiliado_Beneficiario", {
   },
   {
     timestamps: false,
-    tableName: 'Afiliado', 
+    tableName: 'afiliado_beneficiario', 
   }
 );
 

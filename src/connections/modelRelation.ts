@@ -6,38 +6,57 @@ import Planes from "../models/Planes";
 import Sede from "../models/Sede";
 import UserRoles from "../models/UserRoles";
 import Users from "../models/Users";
+import TipoDocumentoIdentidad from "../models/TipoDocumentoIdentidad";
 
+
+Afiliado.belongsTo(TipoDocumentoIdentidad,{
+  foreignKey: "tipo_documento",
+  constraints: true,
+  foreignKeyConstraint: true
+
+})
 
 AfiliadoBeneficiario.belongsTo(Afiliado, {
   foreignKey: 'id_afiliado_beneficiario',
   as: 'Afiliado',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true
 });
 
 AfiliadoBeneficiario.belongsTo(Afiliado, {
   foreignKey: 'id_afiliado_cotizante',
   as: 'AfiliadoCotizante',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true,
 });
 
 Convenio.belongsTo(Planes, {
   foreignKey: 'id_plan',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true
+  
 });
 
 Convenio.belongsTo(Afiliado, {
   foreignKey: 'id_afiliado',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true
+  
 });
 
 Convenio.belongsTo(Sede, {
   foreignKey: 'id_sede',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true
+  
 });
 
 Users.belongsTo(UserRoles, {
   foreignKey: 'id_user_role',
-  onDelete: 'CASCADE',
+  constraints: true,
+  foreignKeyConstraint: true
+  
+  
 });
 
 

@@ -1,5 +1,5 @@
 import { DatosIngresados } from "../../../interfaces/datos.interface";
-import getInfoWebService from "./5.getInfoWebService";
+import getInfoWebService from "./6.getInfoWebService";
 
 const validarEstadoAfiliacion = async (datos: DatosIngresados) => {
     const datosWebService= await getInfoWebService(datos)

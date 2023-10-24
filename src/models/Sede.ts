@@ -11,6 +11,7 @@ const Sede = database.define("Sede", {
   descripcion: {
     type: DataTypes.STRING(50),
     allowNull: true,
+    defaultValue: null
   },
   id_location: {
     type: DataTypes.INTEGER,

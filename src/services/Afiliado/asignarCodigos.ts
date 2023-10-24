@@ -1,11 +1,11 @@
 import { DatosIngresados } from "../../interfaces/datos.interface";
-import validarAntiguedad from "./validaciones/3.validarAntiguedad";
+import validarAntiguedad from "./validaciones/4.validarAntiguedad";
 import validarDatos from "./validaciones/1.validarDatos";
-import validarEstadoAfiliacion from "./validaciones/4.validarEstadoAfiliacion";
+import validarEstadoAfiliacion from "./validaciones/5.validarEstadoAfiliacion";
 import validarAfiliado from "./validaciones/2.validarAfiliado";
-import validarCorporativo from "./validaciones/7.validarCorporativo";
-import validarAsignacion from "./validaciones/8.validarAsignacion";
-import validarResponse from "./validaciones/9.validarResponse";
+import validarCorporativo from "./validaciones/8.validarCorporativo";
+import validarAsignacion from "./validaciones/9.validarAsignacion";
+import validarResponse from "./validaciones/10.validarResponse";
 
 
 const asignarCodigos = async (datos: DatosIngresados) => {
@@ -18,7 +18,7 @@ const asignarCodigos = async (datos: DatosIngresados) => {
     const afiliado= await validarAfiliado(datos)
     
    
-    //validamos antiguedad
+    //validamos antiguedad si es antiguo traemos el codigo relacionado 
     const antiguedad = await validarAntiguedad(afiliado);
     
     //si no es antigua hacemo las demas validaciones
@@ -31,11 +31,15 @@ const asignarCodigos = async (datos: DatosIngresados) => {
         const corporativo = await validarCorporativo(datosWeb);
         
         //validamos asignacion
-        validarAsignacion(datos, afiliado, corporativo)
+        const asignacion= await validarAsignacion(datos, afiliado, corporativo)
+
+        //Mandamos las respuesta al front si el usuario es nuevo
+        const response= validarResponse(afiliado, datos, asignacion, false);
+        return response
     }
 
-    //Mandamos las respuesta al front
-    const response= validarResponse(afiliado, datos, antiguedad);
+    //Mandamos las respuesta al front si el usuario es antiguo
+    const response= validarResponse(afiliado, datos, antiguedad, true);
     return response
     
     

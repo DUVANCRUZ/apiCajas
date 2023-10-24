@@ -8,8 +8,9 @@ const validarAsignacion = async (datos: DatosIngresados, afiliado: AfiliadoInter
 
     // Construye la parte condicional de la consulta de Sequelize en función de 'corporativo'
     const whereCondition = {
-        activo: true,
-        tipo_tarifa: corporativo ? 'CORPORATIVO' : tarifa
+        asignado: 0,
+        tipo_tarifa: corporativo ? 'CORPORATIVO' : tarifa,
+        id_afiliado: null
     };
 
     // Realiza la búsqueda en Convenio
@@ -25,7 +26,7 @@ const validarAsignacion = async (datos: DatosIngresados, afiliado: AfiliadoInter
 
     // Actualiza las propiedades del convenio encontrado
     const updatedConvenio = await asignacion.update({
-        activo: false,
+        asignado: 1,
         id_plan: idPlan,
         id_sede: idSede,
         num_doc_afiliado: numero_doc,

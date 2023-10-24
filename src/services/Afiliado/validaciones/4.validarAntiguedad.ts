@@ -13,7 +13,7 @@ const validarAntiguedad = async (afiliado: AfiliadoInterface) => {
       return false
     }
       
-    return true
+    return convenio.dataValues.codigo
     
     } catch (error) {
     throw new Error("Error al buscar convenios");

@@ -8,11 +8,6 @@ const UserRoles = database.define("User_roles", {
     primaryKey: true,
     autoIncrement: true,
   },
-  username: {
-    type: DataTypes.STRING(45),
-    allowNull: false,
-    unique: true,
-  },
   role: {
     type: DataTypes.STRING(45),
     allowNull: false,
