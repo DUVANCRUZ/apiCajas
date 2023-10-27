@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "nodemon src/index.ts --exec ts-node"
+    "dev": "nodemon src/index.ts --exec ts-node",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "joi": "^17.11.0",
     "morgan": "^1.10.0",
     "mysql2": "^3.6.1",
+    "rimraf": "^5.0.5",
     "sequelize": "^6.33.0",
     "sequelize-typescript": "^2.1.5"
   }
