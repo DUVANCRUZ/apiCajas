@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import database from "../connections/database";
+import { database } from "../connections/database";
 
-const Users = database.define("Users", {
+export const Users = database.define("Users", {
   id_user: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -27,7 +27,3 @@ const Users = database.define("Users", {
     defaultValue: 1,
   },
 });
-
-
-
-export default Users;

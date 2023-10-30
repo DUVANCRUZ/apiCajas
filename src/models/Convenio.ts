@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import database from "../connections/database";
+import { database } from "../connections/database";
 
 export const Convenio = database.define(
   "Convenio",

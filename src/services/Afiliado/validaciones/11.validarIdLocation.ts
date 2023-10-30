@@ -1,29 +1,20 @@
-import Sede from "../../../models/Sede";
+import { Sede } from "../../../models/Sede";
 
+export const validarIdLocation = async (idSede: string) => {
+  try {
+    const numberIdSede: number = parseInt(idSede);
 
+    const sede = await Sede.findByPk(numberIdSede);
+    console.log(sede);
 
-const validarIdLocation = async (idSede: string) => {
-   
-    
-    try {
-        const numberIdSede:number = parseInt(idSede)
-        
-        const sede = await Sede.findByPk(numberIdSede);
-        console.log(sede)
-
-        if (!sede) {
-            throw new Error("Sede no encontrada");
-        }       
-  
-        const id_sede= sede.dataValues.id_location; 
-        return id_sede;
-        
-    } catch (error) {
-        
-        console.error("Error al buscar el tipo de documento:", error);
-        return "Error";
+    if (!sede) {
+      throw new Error("Sede no encontrada");
     }
 
-}
-
-export default validarIdLocation
+    const id_sede = sede.dataValues.id_location;
+    return id_sede;
+  } catch (error) {
+    console.error("Error al buscar el tipo de documento:", error);
+    return "Error";
+  }
+};

@@ -3,7 +3,7 @@ import express, { json, Application } from "express";
 import pkgjson from "../package.json";
 import morgan from "morgan";
 import cors from "cors";
-import db from "./connections/database";
+import { database } from "./connections/database";
 import { modelRelation } from "./connections/modelRelation";
 import { router } from "./routes";
 import { ProjectInfoI } from "./interfaces/projectInfo.interface";
@@ -52,7 +52,7 @@ export class App {
   }
 
   private async dbConection(): Promise<void> {
-    await db.authenticate();
+    await database.authenticate();
     console.log("Database conected");
   }
 

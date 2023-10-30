@@ -1,4 +1,4 @@
-import TipoDocumentoIdentidad from "../../../models/TipoDocumentoIdentidad";
+import { TipoDocumentoIdentidad } from "../../../models/TipoDocumentoIdentidad";
 
 export const validarTipoDoc = async (tipoDoc: number) => {
   //console.log(tipoDoc)

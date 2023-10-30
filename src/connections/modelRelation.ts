@@ -1,12 +1,12 @@
-import db from "./database";
-import Afiliado from "../models/Afiliado";
-import AfiliadoBeneficiario from "../models/AfiliadoBeneficiario";
-import Convenio from "../models/Convenio";
-import Planes from "../models/Planes";
-import Sede from "../models/Sede";
-import UserRoles from "../models/UserRoles";
-import Users from "../models/Users";
-import TipoDocumentoIdentidad from "../models/TipoDocumentoIdentidad";
+import { database } from "./database";
+import { Afiliado } from "../models/Afiliado";
+import { AfiliadoBeneficiario } from "../models/AfiliadoBeneficiario";
+import { Convenio } from "../models/Convenio";
+import { Planes } from "../models/Planes";
+import { Sede } from "../models/Sede";
+import { UserRoles } from "../models/UserRoles";
+import { Users } from "../models/Users";
+import { TipoDocumentoIdentidad } from "../models/TipoDocumentoIdentidad";
 
 Afiliado.belongsTo(TipoDocumentoIdentidad, {
   foreignKey: "tipo_documento",
@@ -55,7 +55,7 @@ Users.belongsTo(UserRoles, {
 // Sincroniza los modelos con la base de datos
 export async function modelRelation(): Promise<void> {
   try {
-    await db.sync();
+    await database.sync();
     console.log("Database synchronized successfully");
   } catch (error) {
     console.error("Error synchronizing the database:", error);
