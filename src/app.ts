@@ -1,50 +1,65 @@
 //este modulo declara el servidor
 import express, { json, Application } from "express";
+import pkgjson from "../package.json";
 import morgan from "morgan";
 import cors from "cors";
 import db from "./connections/database";
 import { modelRelation } from "./connections/modelRelation";
-import router from "./routes";
+import { router } from "./routes";
+import { ProjectInfoI } from "./interfaces/projectInfo.interface";
 
 export class App {
-    private app: Application;
+  private app: Application;
 
-    constructor (private port?: number | string )  { 
-        this.app = express();
-        this.settings();
-        this.middlewares();
-        this.dbConection();
-        this.relationSync();
-        this.routes();
-    
-    }
+  constructor(private port?: number | string) {
+    this.app = express();
+    this.startApp();
+  }
 
-    settings(){
-        this.app.set("port", process.env.PORT || this.port || 3000);
-        
-    }
+  private async startApp(): Promise<void> {
+    this.settings();
+    this.middlewares();
+    await this.dbConection();
+    this.relationSync();
+    await this.routes();
+  }
 
-    middlewares(){
-        this.app.use(morgan("dev"));
-        this.app.use(cors());
-        this.app.use(json());
-    }
+  private settings(): void {
+    this.app.set("port", process.env.PORT || this.port || 3000);
+    this.app.set("pkgjson", pkgjson);
+  }
+  public async projectInfo(): Promise<ProjectInfoI> {
+    const pkgjson = await this.app.get("pkgjson");
+    return {
+      ProjectName: pkgjson.name,
+      ProjectDescription: pkgjson.description,
+      ProjectCompany: pkgjson.company,
+      ProjectDeveloper: pkgjson.developer,
+      ProjectDeveloperEmail: pkgjson.email,
+      ProjectVersion: pkgjson.version,
+    };
+  }
 
-    listen(){ 
-        this.app.listen(this.app.get("port"));
-        console.log("Server in port", this.app.get("port"));
-    }
+  private middlewares(): void {
+    this.app.use(morgan("dev"));
+    this.app.use(cors());
+    this.app.use(json());
+  }
 
-    async dbConection(){
-        await db.authenticate();
-        console.log("Database conected");
+  listen(): void {
+    this.app.listen(this.app.get("port"));
+    console.log("Server in port", this.app.get("port"));
+  }
 
-    }
+  private async dbConection(): Promise<void> {
+    await db.authenticate();
+    console.log("Database conected");
+  }
 
-   relationSync(){
-        modelRelation();
-    }
-    routes(){
-        this.app.use('/', router); 
-    }
+  private relationSync(): void {
+    modelRelation();
+  }
+  private async routes(): Promise<void> {
+    this.app.use("/api", router);
+  }
 }
