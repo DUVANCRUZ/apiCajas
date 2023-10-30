@@ -25,6 +25,7 @@ export const asignarCodigosController: Handler = async (
     const response = await asignarCodigos(datos);
     return res.status(200).json(response);
   } catch (error: any) {
-    return res.status(400).send(error.message);
+    const statusCode: number = 400;
+    return res.status(statusCode).json(error);
   }
 };

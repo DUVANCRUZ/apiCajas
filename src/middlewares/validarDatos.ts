@@ -22,7 +22,7 @@ export const validarDatos = async (
   if (error) {
     const errors = error.details.map((detail) => detail.message);
     console.log(errors);
-    res.status(401).json({ error: errors });
+    res.status(401).json({ error: errors[0] });
     return;
   }
   next();
