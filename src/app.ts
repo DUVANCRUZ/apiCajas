@@ -3,9 +3,10 @@ import express, { json, Application } from "express";
 import pkgjson from "../package.json";
 import morgan from "morgan";
 import cors from "cors";
+
 import { database } from "./connections/database";
 import { modelRelation } from "./connections/modelRelation";
-import { router } from "./routes";
+import { router } from "./routes/index.routes";
 import { ProjectInfoI } from "./interfaces/projectInfo.interface";
 
 export class App {

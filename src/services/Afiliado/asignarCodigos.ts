@@ -1,6 +1,6 @@
 import { DatosIngresados } from "../../interfaces/datos.interface";
 import { validarAntiguedad } from "./validaciones/4.validarAntiguedad";
-import { validarDatos } from "./validaciones/1.validarDatos";
+import { validarDatos } from "../../middlewares/validarDatos";
 import { validarEstadoAfiliacion } from "./validaciones/5.validarEstadoAfiliacion";
 import { validarAfiliado } from "./validaciones/2.validarAfiliado";
 import { validarCorporativo } from "./validaciones/8.validarCorporativo";
@@ -8,11 +8,6 @@ import { validarAsignacion } from "./validaciones/9.validarAsignacion";
 import { validarResponse } from "./validaciones/10.validarResponse";
 
 export const asignarCodigos = async (datos: DatosIngresados) => {
-  //validamos dtos
-  const validarDatosI = validarDatos(datos);
-  if (!validarDatosI) {
-    return validarDatosI;
-  }
   //validamos existencia de afiliado en base de datos
   const afiliado = await validarAfiliado(datos);
 

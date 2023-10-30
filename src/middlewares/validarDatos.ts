@@ -1,7 +1,8 @@
+import { Handler, NextFunction, Request, Response } from "express";
 import * as Joi from "joi";
-import { DatosIngresados } from "../../../interfaces/datos.interface";
+import { DatosIngresados } from "../interfaces/datos.interface";
 
-const schema = Joi.object({
+const schema: Joi.Schema<DatosIngresados> = Joi.object({
   eMail: Joi.string()
     .email({ tlds: { allow: false } })
     .required(),
@@ -11,13 +12,18 @@ const schema = Joi.object({
   tipoDocumento: Joi.string().required(),
 });
 
-export function validarDatos(datos: DatosIngresados): boolean {
+export const validarDatos = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const datos: DatosIngresados = req.body;
   const { error } = schema.validate(datos);
   if (error) {
     const errors = error.details.map((detail) => detail.message);
     console.log(errors);
-    throw new Error("Los datos son inválidos");
-  } else {
-    return true;
+    res.status(401).json({ error: errors });
+    return;
   }
-}
+  next();
+};
