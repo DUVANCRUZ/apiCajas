@@ -1,7 +1,8 @@
 import { DatosWebService } from "../../../interfaces/datosWebService.interface";
+import { WebServiceI } from "../../../interfaces/webService.interface";
 
-export const validarCorporativo = async (datosWebService: DatosWebService) => {
-  const { afiliadoCorporativo } = datosWebService;
+export const validarCorporativo = async (datosWebService: WebServiceI) => {
+  const { afiliadoCorporativo } = datosWebService.data;
 
   if (!afiliadoCorporativo) return false;
 

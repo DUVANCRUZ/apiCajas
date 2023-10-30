@@ -1,6 +1,8 @@
 import { Request, Response, Handler } from "express";
 import { getAfiliado } from "../services/Afiliado/getAfiliado";
 import { asignarCodigos } from "../services/Afiliado/asignarCodigos";
+import { ErrorI } from "../interfaces/error.interfasce";
+import { errorResponse } from "../services/error.service";
 
 export const getAfiladoControllers: Handler = async (
   req: Request,
@@ -24,8 +26,7 @@ export const asignarCodigosController: Handler = async (
   try {
     const response = await asignarCodigos(datos);
     return res.status(200).json(response);
-  } catch (error: any) {
-    const statusCode: number = 400;
-    return res.status(statusCode).json(error);
+  } catch (error: ErrorI | any) {
+    errorResponse(error, res);
   }
 };

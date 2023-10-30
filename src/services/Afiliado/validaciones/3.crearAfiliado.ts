@@ -1,11 +1,13 @@
+import { AfiliadoInterface } from "../../../interfaces/afiliado.interface";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { DatosWebService } from "../../../interfaces/datosWebService.interface";
+import { WebServiceI } from "../../../interfaces/webService.interface";
 import { Afiliado } from "../../../models/Afiliado";
 
 export const crearAfiliado = async (
   datos: DatosIngresados,
-  datosWeb: DatosWebService
-) => {
+  datosWeb: WebServiceI
+): Promise<any> => {
   const { eMail, nDocumento, tipoDocumento } = datos;
   const {
     nombreUsuario,
@@ -13,7 +15,7 @@ export const crearAfiliado = async (
     categoria,
     fechaNacimiento,
     generoAfiliado,
-  } = datosWeb;
+  } = datosWeb.data;
   try {
     const afiliado = await Afiliado.create({
       tipo_documento: tipoDocumento,
@@ -25,6 +27,7 @@ export const crearAfiliado = async (
       tarifa: categoria,
       estado_afiliado: estadoAfiliacion,
     });
+    console.log(afiliado);
 
     return afiliado.dataValues;
   } catch (error) {

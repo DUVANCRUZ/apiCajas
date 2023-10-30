@@ -1,6 +1,7 @@
-import { Handler, NextFunction, Request, Response } from "express";
-import * as Joi from "joi";
+import { NextFunction, Request, Response } from "express";
+import Joi from "joi";
 import { DatosIngresados } from "../interfaces/datos.interface";
+import { ErrorI } from "../interfaces/error.interfasce";
 
 const schema: Joi.Schema<DatosIngresados> = Joi.object({
   eMail: Joi.string()
@@ -21,8 +22,12 @@ export const validarDatos = async (
   const { error } = schema.validate(datos);
   if (error) {
     const errors = error.details.map((detail) => detail.message);
-    console.log(errors);
-    res.status(401).json({ error: errors[0] });
+    const responseError: ErrorI = {
+      error: true,
+      message: errors[0],
+      statusCode: 401,
+    };
+    res.status(responseError.statusCode).json(responseError);
     return;
   }
   next();

@@ -1,4 +1,7 @@
+import { AfiliadoInterface } from "../../../interfaces/afiliado.interface";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
+import { ErrorI } from "../../../interfaces/error.interfasce";
+import { WebServiceI } from "../../../interfaces/webService.interface";
 import { Afiliado } from "../../../models/Afiliado";
 import { crearAfiliado } from "./3.crearAfiliado";
 import { getInfoWebService } from "./6.getInfoWebService";
@@ -12,14 +15,14 @@ export const validarAfiliado = async (datos: DatosIngresados) => {
     });
 
     if (!afiliado) {
-      const datosWeb = await getInfoWebService(datos);
+      const datosWeb: WebServiceI = await getInfoWebService(datos);
       const afiliadoCreado = crearAfiliado(datos, datosWeb);
-      console.log(afiliadoCreado);
+      console.log("From_AF", afiliadoCreado);
       return afiliadoCreado;
     }
 
     return afiliado.dataValues;
-  } catch (error) {
-    throw new Error("Error al buscar o crear el afiliados");
+  } catch (error: ErrorI | any) {
+    throw error;
   }
 };
