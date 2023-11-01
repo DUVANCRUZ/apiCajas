@@ -9,10 +9,11 @@ if (!DB_USER || !DB_PASSWORD || !DB_DATABASE || !DB_PORT) {
 }
 
 export const database: Sequelize = new Sequelize({
-  dialect: "mysql",
-  host: "localhost",
+  database: DB_DATABASE,
   username: DB_USER,
   password: DB_PASSWORD,
-  database: DB_DATABASE,
+  host: "localhost",
+  dialect: "mysql",
+  logging: false,
   port: Number(DB_PORT),
 });
