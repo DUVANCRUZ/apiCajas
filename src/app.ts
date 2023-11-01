@@ -3,11 +3,13 @@ import express, { json, Application } from "express";
 import pkgjson from "../package.json";
 import morgan from "morgan";
 import cors from "cors";
+import swaggerUI from "swagger-ui-express";
 
 import { database } from "./connections/database";
 import { modelRelation } from "./connections/modelRelation";
 import { router } from "./routes/index.routes";
 import { ProjectInfoI } from "./interfaces/projectInfo.interface";
+import swaggerSetup from "./documentation/Swagger";
 
 export class App {
   private app: Application;
@@ -45,6 +47,7 @@ export class App {
     this.app.use(morgan("dev"));
     this.app.use(cors());
     this.app.use(json());
+    this.app.use("/doc", swaggerUI.serve, swaggerUI.setup(swaggerSetup));
   }
 
   listen(): void {
