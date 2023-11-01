@@ -35,30 +35,9 @@ export const renovarToken = async (): Promise<string> => {
       );
       throw new Error(WStoken.message);
     }
-    //cambiar el API:TOKEN en el archivo .env
+
     if ("access_token" in WStoken) {
       token = WStoken.access_token;
-
-      process.env.API_TOKEN = token;
-
-      // Leer el contenido actual del archivo .env
-      const contenidoArchivoEnv = fs.readFileSync(".env", "utf-8");
-
-      // Dividir las líneas en un array
-      const lineas = contenidoArchivoEnv.split("\n");
-
-      // Buscar y reemplazar el valor de API_TOKEN
-      const nuevoContenido = lineas
-        .map((linea) => {
-          if (linea.startsWith("API_TOKEN=")) {
-            return `API_TOKEN=${token}`;
-          }
-          return linea;
-        })
-        .join("\n");
-
-      // Escribir el nuevo contenido de vuelta al archivo .env
-      fs.writeFileSync(".env", nuevoContenido);
     }
     return token;
   } catch (error) {

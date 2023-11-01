@@ -9,15 +9,17 @@ export const getAfiliado = async (
   tipDoc: string,
   doc: string
 ): Promise<WebServiceI> => {
+  let token: string = process.env.API_TOKEN as string;
   let response: WebServiceI | WebServiceErrorTokenI = await getAfiliadoToken(
     tipDoc,
-    doc
+    doc,
+    token
   );
   // console.log(response);
   if ("error" in response) {
     console.log("Token no válido. Renovando token...");
-    await renovarToken();
-    response = await getAfiliadoToken(tipDoc, doc);
+    token = await renovarToken();
+    response = await getAfiliadoToken(tipDoc, doc, token);
   }
   return response as WebServiceI;
 };

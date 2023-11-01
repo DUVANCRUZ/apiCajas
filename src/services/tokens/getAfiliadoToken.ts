@@ -9,14 +9,15 @@ import { ErrorI } from "../../interfaces/error.interfasce";
 
 export const getAfiliadoToken = async (
   tipDoc: string,
-  doc: string
+  doc: string,
+  token: string
 ): Promise<WebServiceI | WebServiceErrorTokenI> => {
   try {
     const opciones: optionsI = {
       method: "GET",
       url: `${process.env.REST_ENDPOINT_USER_Cajamag}/${tipDoc}/${doc}`,
       headers: {
-        Authorization: `Bearer ${process.env.API_TOKEN as string}`,
+        Authorization: `Bearer ${token}`,
       },
     };
 
