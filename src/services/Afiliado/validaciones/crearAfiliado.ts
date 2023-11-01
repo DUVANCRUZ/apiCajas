@@ -1,6 +1,4 @@
-import { AfiliadoInterface } from "../../../interfaces/afiliado.interface";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
-import { DatosWebService } from "../../../interfaces/datosWebService.interface";
 import { WebServiceI } from "../../../interfaces/webService.interface";
 import { Afiliado } from "../../../models/Afiliado";
 
@@ -27,8 +25,6 @@ export const crearAfiliado = async (
       tarifa: categoria,
       estado_afiliado: estadoAfiliacion,
     });
-    console.log(afiliado);
-
     return afiliado.dataValues;
   } catch (error) {
     throw new Error("Error al buscar convenios");

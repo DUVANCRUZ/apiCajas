@@ -1,17 +1,18 @@
-import { ErrorI } from "../../interfaces/error.interfasce";
 import {
   WebServiceErrorI,
   WebServiceErrorTokenI,
   WebServiceI,
+  optionsI,
 } from "../../interfaces/webService.interface";
 import { restService } from "../webServices/restService";
+import { ErrorI } from "../../interfaces/error.interfasce";
 
 export const getAfiliadoToken = async (
   tipDoc: string,
   doc: string
 ): Promise<WebServiceI | WebServiceErrorTokenI> => {
   try {
-    const opciones = {
+    const opciones: optionsI = {
       method: "GET",
       url: `${process.env.REST_ENDPOINT_USER_Cajamag}/${tipDoc}/${doc}`,
       headers: {

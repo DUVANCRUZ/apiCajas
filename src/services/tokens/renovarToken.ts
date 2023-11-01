@@ -1,5 +1,4 @@
 import fs from "fs";
-import "dotenv/config";
 import FormData from "form-data";
 import { restService } from "../webServices/restService";
 import {
@@ -29,7 +28,6 @@ export const renovarToken = async (): Promise<string> => {
     const WStoken: WebServiceTokenI | WebServiceErrorTokenI = await restService(
       opcionesTokenCajamag
     );
-    console.log(WStoken);
 
     if ("message" in WStoken) {
       console.log(

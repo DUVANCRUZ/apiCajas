@@ -34,7 +34,7 @@ export interface optionsI {
   method: VervosT;
   url: string;
   headers: {
-    "Content-Type": string;
+    "Content-Type"?: string;
     Authorization?: string;
   };
   data?: object;

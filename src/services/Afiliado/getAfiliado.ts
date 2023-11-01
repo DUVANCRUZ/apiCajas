@@ -13,7 +13,7 @@ export const getAfiliado = async (
     tipDoc,
     doc
   );
-
+  // console.log(response);
   if ("error" in response) {
     console.log("Token no válido. Renovando token...");
     await renovarToken();

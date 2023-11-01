@@ -1,37 +1,54 @@
 import { DatosIngresados } from "../../interfaces/datos.interface";
-import { validarAntiguedad } from "./validaciones/4.validarAntiguedad";
-import { validarDatos } from "../../middlewares/validarDatos";
-import { validarEstadoAfiliacion } from "./validaciones/5.validarEstadoAfiliacion";
-import { validarAfiliado } from "./validaciones/2.validarAfiliado";
-import { validarCorporativo } from "./validaciones/8.validarCorporativo";
-import { validarAsignacion } from "./validaciones/9.validarAsignacion";
-import { validarResponse } from "./validaciones/10.validarResponse";
+import { validarAntiguedad } from "./validaciones/validarAntiguedad";
+import { validarEstadoAfiliacion } from "./validaciones/validarEstadoAfiliacion";
+import { validarAfiliado } from "./validaciones/validarAfiliado";
+import { validarCorporativo } from "./validaciones/validarCorporativo";
+import { validarAsignacionCodigo } from "./validaciones/validarAsignacion";
+import { validarResponse } from "./validaciones/validarResponse";
+import { WebServiceI } from "../../interfaces/webService.interface";
+import { getInfoWebService } from "./validaciones/getInfoWebService";
+import { validarSede } from "./validaciones/validarSede";
+import { validarPlan } from "./validaciones/validarPlan";
+import { ReponseI } from "../../interfaces/response.interface";
 
-export const asignarCodigos = async (datos: DatosIngresados) => {
+export const asignarCodigos = async (
+  datos: DatosIngresados
+): Promise<ReponseI> => {
+  // consulta webService
+  const datosWebService: WebServiceI = await getInfoWebService(datos);
+
   //validamos existencia de afiliado en base de datos
-  const afiliado = await validarAfiliado(datos);
+  const afiliado = await validarAfiliado(datos, datosWebService);
 
-  //validamos antiguedad si es antiguo traemos el codigo relacionado
+  const id_location = await validarSede(datos);
+  const corporativo = await validarCorporativo(datosWebService);
+  if (corporativo) {
+    afiliado.tarifa = process.env.TYPO_TARIFA_CORPORATIVO as string;
+  }
   const antiguedad = await validarAntiguedad(afiliado);
 
-  //si no es antigua hacemo las demas validaciones
-  if (!antiguedad) {
-    //validamos datos en el webservice y el estado de afiliado
-    const datosWeb = await validarEstadoAfiliacion(datos);
-    //console.log(datosWeb)
-
-    //validamos si el usuario es corporativo
-    const corporativo = await validarCorporativo(datosWeb);
-
-    //validamos asignacion
-    const asignacion = await validarAsignacion(datos, afiliado, corporativo);
-
-    //Mandamos las respuesta al front si el usuario es nuevo
-    const response = validarResponse(afiliado, datos, asignacion, false);
+  if (antiguedad) {
+    const response = validarResponse(
+      afiliado,
+      datos,
+      antiguedad,
+      id_location,
+      true
+    );
     return response;
   }
 
-  //Mandamos las respuesta al front si el usuario es antiguo
-  const response = validarResponse(afiliado, datos, antiguedad, true);
+  await validarPlan(datos);
+  await validarEstadoAfiliacion(datosWebService);
+
+  const asignacionCodigo = await validarAsignacionCodigo(datos, afiliado);
+
+  const response = validarResponse(
+    afiliado,
+    datos,
+    asignacionCodigo,
+    id_location,
+    false
+  );
   return response;
 };

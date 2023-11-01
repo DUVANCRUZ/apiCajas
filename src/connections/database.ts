@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { Sequelize } from "sequelize-typescript";
 
 const { DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;

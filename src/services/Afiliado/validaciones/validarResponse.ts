@@ -1,22 +1,20 @@
-import "dotenv/config";
-import { AfiliadoInterface } from "../../../interfaces/afiliado.interface";
+import { AfiliadoI } from "../../../interfaces/afiliado.interface";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
-import { reponseInterface } from "../../../interfaces/response.interface";
-import { validarIdLocation } from "./11.validarIdLocation";
+import { ReponseI } from "../../../interfaces/response.interface";
+import { ErrorI } from "../../../interfaces/error.interfasce";
 
 export const validarResponse = async (
-  afiliado: AfiliadoInterface,
+  afiliado: AfiliadoI,
   datos: DatosIngresados,
   codigo: string,
+  idLocation: number,
   isAntiguo: boolean
-) => {
+): Promise<ReponseI> => {
   try {
     const { URL_DOMAIN_SMART_FIT } = process.env;
     const { nombre_completo, estado_afiliado, tarifa } = afiliado;
     const { eMail, idSede, nDocumento, tipoDocumento } = datos;
-    const idLocation = await validarIdLocation(idSede);
-    console.log(idLocation);
-    const responseData: reponseInterface = {
+    const responseData: ReponseI = {
       availableCodes: true,
       isAntiguo: isAntiguo,
       nombreCompleto: nombre_completo,
@@ -26,11 +24,17 @@ export const validarResponse = async (
       eMail: eMail,
       estadoAfiliado: estado_afiliado,
       tarifa: tarifa,
-      valoresAfiliado: null,
+      valoresAfiliado: "",
       urlConvenio: `${URL_DOMAIN_SMART_FIT}?location_id=${idLocation}&plan=smart&code=${codigo}`,
     };
     return responseData;
   } catch (error) {
-    throw new Error("Fallo la asignacion del codigo");
+    console.log("Error generando respuesta", error);
+    const responseError: ErrorI = {
+      error: true,
+      message: `${error}`,
+      statusCode: 500,
+    };
+    throw responseError;
   }
 };

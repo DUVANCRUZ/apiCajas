@@ -1,13 +1,13 @@
-export interface reponseInterface {
+export interface ReponseI {
   availableCodes: boolean;
   isAntiguo: boolean;
-  nombreCompleto: string | null;
+  nombreCompleto: string;
   tipoDocumentoIdentidad: string;
   numeroDoc: string;
   idSede: string;
   eMail: string;
-  estadoAfiliado: boolean | null;
-  tarifa: string | null;
-  valoresAfiliado: string | null;
+  estadoAfiliado: boolean;
+  tarifa: string;
+  valoresAfiliado: string;
   urlConvenio: string;
 }

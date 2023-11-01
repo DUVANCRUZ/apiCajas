@@ -1,14 +1,33 @@
+export interface AfiliadoI {
+  id: number;
+  tipo_documento: number;
+  numero_doc: string;
+  nombre_completo: string;
+  fecha_nacimiento: Date;
+  email: string;
+  genero: string;
+  tarifa: string;
+  estado_afiliado: boolean;
+  descripcion_estado: string;
+}
 
+export interface asignacionCodigo
+  extends Omit<
+    AfiliadoI,
+    | "tipo_documento"
+    | "numero_doc"
+    | "nombre_completo"
+    | "email"
+    | "genero"
+    | "estado_afiliado"
+    | "descripcion_estado"
+  > {
+  idSede: number;
+  idPlan: number;
+}
 
-export interface AfiliadoInterface{
-        id: number,
-        tipo_documento: number|null,
-        numero_doc: string|null,
-        nombre_completo: string|null,
-        fecha_nacimiento: Date|null
-        email: string|null,
-        genero: string,
-        tarifa: string|null,
-        estado_afiliado: boolean|null,
-        descripcion_estado: string|null,    
+export interface obtenerConvenio {
+  id_afiliado: number;
+  asignado: number;
+  liberado: number;
 }
