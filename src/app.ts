@@ -30,7 +30,7 @@ export class App {
   }
 
   private settings(): void {
-    this.app.set("port", process.env.PORT || this.port || 3000);
+    this.app.set("port", process.env.EXPOSE_PORT || this.port || 3000);
     this.app.set("pkgjson", pkgjson);
   }
   public async projectInfo(): Promise<ProjectInfoI> {

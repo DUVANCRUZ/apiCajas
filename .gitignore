@@ -125,7 +125,10 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
+# dotenv environment variables file
 .env
+.env.prod
+.env.test
 .env.development.local
 .env.test.local
 .env.production.local
@@ -618,8 +621,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+###winston logger
+src/logs
+
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,macos,linux,visualstudio,visualstudiocode
-
