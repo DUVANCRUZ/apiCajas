@@ -91,7 +91,9 @@ La documentación de la API se genera automáticamente a partir de los comentari
 
 ### Cargar Imagen Doker
 
-- **Documentacion** : <https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html>
+- **Documentacion :**
+  - <https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry_auth.html>
+  - <https://docs.docker.com/get-started/02_our_app/>
 
 - **Es importante agregar en --prfile con tu usuario de aws sso**
 
@@ -113,15 +115,14 @@ La documentación de la API se genera automáticamente a partir de los comentari
 
 Este proyecto utiliza variables de entorno para configurar su funcionamiento. A continuación, se enumeran las variables de entorno necesarias y sus funciones:
 
-- `PORT`: Define el puerto en el que se ejecutará la API.
-- `DB_USER`: Especifica el usuario de la base de datos.
-- `DB_PASSWORD`: Proporciona la contraseña de la base de datos.
-- `DB_DATABASE`: Indica el nombre de la base de datos a la que se conectará la API.
+- `EXPOSE_PORT`: Define el puerto en el que se ejecutará la API.
+- `USER_NAME`: Especifica el usuario de la base de datos.
+- `PASSWORD`: Proporciona la contraseña de la base de datos.
+- `DB_NAME`: Indica el nombre de la base de datos a la que se conectará la API.
 - `DB_PORT`: Establece el puerto de la base de datos.
 - `URL_DOMAIN_SMART_FIT`: URL del dominio de Smart Fit para ciertas operaciones.
-- `REST_GRANT_TYPE_Cajamag`: Tipo de concesión para autenticación en Cajamag.
-- `REST_USERNAME_Cajamag`: Nombre de usuario para la autenticación en Cajamag.
-- `REST_PASSWORD_Cajamag`: Contraseña para la autenticación en Cajamag.
-- `REST_ENDPOINT_TOKEN_Cajamag`: URL del endpoint para obtener un token en Cajamag.
-- `REST_ENDPOINT_USER_Cajamag`: URL del endpoint para obtener información del usuario en Cajamag.
-- `API_TOKEN`: Token de autenticación para la API.
+- `AUTHORIZATION_TOKEN_USERNAME`: Nombre de usuario para la autenticación en Cajamag.
+- `AUTHORIZATION_TOKEN_PASSWOR`: Contraseña para la autenticación en Cajamag.
+- `ENDPOINT_TOKEN`: URL del endpoint para obtener un token en Cajamag.
+- `ENDPOINT_API`: URL del endpoint para obtener información del usuario en Cajamag.
+- `AUTHORIZATION_API`: Token de autenticación para la API.

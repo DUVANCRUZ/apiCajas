@@ -12,12 +12,12 @@ export const renovarToken = async (): Promise<string> => {
   try {
     let token: string = "";
     const data: FormData = new FormData();
-    data.append("email", `${process.env.REST_USERNAME_Cajamag}`);
-    data.append("password", `${process.env.REST_PASSWORD_Cajamag}`);
+    data.append("email", `${process.env.AUTHORIZATION_TOKEN_USERNAME}`);
+    data.append("password", `${process.env.AUTHORIZATION_TOKEN_PASSWOR}`);
 
     const opcionesTokenCajamag: optionsI = {
       method: "POST",
-      url: `${process.env.REST_ENDPOINT_TOKEN_Cajamag}`,
+      url: `${process.env.ENDPOINT_TOKEN}`,
       headers: {
         "Content-Type": "application/from-data",
         ...data.getHeaders(),

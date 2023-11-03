@@ -15,7 +15,7 @@ export const getAfiliadoToken = async (
   try {
     const opciones: optionsI = {
       method: "GET",
-      url: `${process.env.REST_ENDPOINT_USER_Cajamag}/${tipDoc}/${doc}`,
+      url: `${process.env.ENDPOINT_API}/${tipDoc}/${doc}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

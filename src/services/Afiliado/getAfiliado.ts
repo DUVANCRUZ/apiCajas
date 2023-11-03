@@ -9,7 +9,7 @@ export const getAfiliado = async (
   tipDoc: string,
   doc: string
 ): Promise<WebServiceI> => {
-  let token: string = process.env.API_TOKEN as string;
+  let token: string = process.env.AUTHORIZATION_API as string;
   let response: WebServiceI | WebServiceErrorTokenI = await getAfiliadoToken(
     tipDoc,
     doc,
