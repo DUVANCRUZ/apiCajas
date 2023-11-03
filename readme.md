@@ -121,6 +121,7 @@ Este proyecto utiliza variables de entorno para configurar su funcionamiento. A 
 - `DB_NAME`: Indica el nombre de la base de datos a la que se conectará la API.
 - `DB_PORT`: Establece el puerto de la base de datos.
 - `URL_DOMAIN_SMART_FIT`: URL del dominio de Smart Fit para ciertas operaciones.
+- `TYPO_TARIFA_CORPORATIVO`: Nombre de la tarifa que se le da un usuario corporativo.
 - `AUTHORIZATION_TOKEN_USERNAME`: Nombre de usuario para la autenticación en Cajamag.
 - `AUTHORIZATION_TOKEN_PASSWOR`: Contraseña para la autenticación en Cajamag.
 - `ENDPOINT_TOKEN`: URL del endpoint para obtener un token en Cajamag.
