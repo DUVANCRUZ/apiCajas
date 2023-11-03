@@ -2,6 +2,8 @@ import { AfiliadoI } from "../../../interfaces/afiliado.interface";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { ReponseI } from "../../../interfaces/response.interface";
 import { ErrorI } from "../../../interfaces/error.interfasce";
+import logger from "../../../utils/logger";
+
 
 export const validarResponse = async (
   afiliado: AfiliadoI,
@@ -29,7 +31,7 @@ export const validarResponse = async (
     };
     return responseData;
   } catch (error) {
-    console.log("Error generando respuesta", error);
+    logger.error("Error generando respuesta " + error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

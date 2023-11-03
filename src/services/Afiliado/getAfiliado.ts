@@ -2,6 +2,7 @@ import {
   WebServiceI,
   WebServiceErrorTokenI,
 } from "../../interfaces/webService.interface";
+import logger from "../../utils/logger";
 import { getAfiliadoToken } from "../tokens/getAfiliadoToken";
 import { renovarToken } from "../tokens/renovarToken";
 
@@ -17,7 +18,7 @@ export const getAfiliado = async (
   );
   // console.log(response);
   if ("error" in response) {
-    console.log("Token no válido. Renovando token...");
+    logger.info("Token no válido. Renovando token...");
     token = await renovarToken();
     response = await getAfiliadoToken(tipDoc, doc, token);
   }

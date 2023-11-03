@@ -7,6 +7,8 @@ import {
   optionsI,
 } from "../../interfaces/webService.interface";
 import { ErrorI } from "../../interfaces/error.interfasce";
+import logger from "../../utils/logger";
+
 
 export const renovarToken = async (): Promise<string> => {
   try {
@@ -30,7 +32,7 @@ export const renovarToken = async (): Promise<string> => {
     );
 
     if ("message" in WStoken) {
-      console.log(
+      logger.info(
         `Log Info ==> Error when authenticating webService => ${WStoken.message}`
       );
       throw new Error(WStoken.message);
@@ -41,7 +43,7 @@ export const renovarToken = async (): Promise<string> => {
     }
     return token;
   } catch (error) {
-    console.error("Error al configurar opciones de solicitud de token:", error);
+    logger.error("Error al configurar opciones de solicitud de token: " + error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

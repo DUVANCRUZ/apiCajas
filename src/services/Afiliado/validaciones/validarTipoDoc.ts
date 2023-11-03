@@ -1,5 +1,6 @@
 import { ErrorI } from "../../../interfaces/error.interfasce";
 import { TipoDocumentoIdentidad } from "../../../models/TipoDocumentoIdentidad";
+import logger from "../../../utils/logger";
 
 export const validarTipoDoc = async (tipoDoc: number) => {
   //console.log(tipoDoc)
@@ -12,7 +13,7 @@ export const validarTipoDoc = async (tipoDoc: number) => {
     const codigoDoc = tipoDocumento.dataValues.codigo;
     return codigoDoc;
   } catch (error) {
-    console.error("Error al buscar el tipo de documento:", error);
+    logger.error("Error al buscar el tipo de documento: " + error);
 
     const responseError: ErrorI = {
       error: true,

@@ -1,5 +1,7 @@
 import { ErrorI } from "../../../interfaces/error.interfasce";
 import { WebServiceI } from "../../../interfaces/webService.interface";
+import logger from "../../../utils/logger";
+
 
 export const validarCorporativo = async (
   datosWebService: WebServiceI
@@ -11,7 +13,7 @@ export const validarCorporativo = async (
 
     return true;
   } catch (error) {
-    console.log("Error al validar afiliadoCorporativo", error);
+    logger.error("Error al validar afiliadoCorporativo: " + error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

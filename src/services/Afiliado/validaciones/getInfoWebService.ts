@@ -1,6 +1,7 @@
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { ErrorI } from "../../../interfaces/error.interfasce";
 import { WebServiceI } from "../../../interfaces/webService.interface";
+import logger from "../../../utils/logger";
 import { getAfiliado } from "../getAfiliado";
 import { validarTipoDoc } from "./validarTipoDoc";
 
@@ -16,7 +17,7 @@ export const getInfoWebService = async (datos: DatosIngresados) => {
 
   if (datosWebService.code === 404) {
     const error: string = "Usuario no encontrado";
-    console.log(error);
+    logger.error(error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

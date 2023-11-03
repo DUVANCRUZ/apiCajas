@@ -6,6 +6,8 @@ import {
 } from "../../interfaces/webService.interface";
 import { restService } from "../webServices/restService";
 import { ErrorI } from "../../interfaces/error.interfasce";
+import logger from "../../utils/logger";
+
 
 export const getAfiliadoToken = async (
   tipDoc: string,
@@ -29,7 +31,7 @@ export const getAfiliadoToken = async (
     }
     return response;
   } catch (error) {
-    console.error("Error al obtener usuario:", error);
+    logger.error("Error al obtener usuario: " + error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

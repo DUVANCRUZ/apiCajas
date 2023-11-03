@@ -1,4 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
+import logger from "../../utils/logger";
+
 
 export const restService = async (config: AxiosRequestConfig): Promise<any> => {
   try {
@@ -18,7 +20,7 @@ export const restService = async (config: AxiosRequestConfig): Promise<any> => {
         throw error.message;
       });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     throw error;
   }
 };

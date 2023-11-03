@@ -5,6 +5,7 @@ import {
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { ErrorI } from "../../../interfaces/error.interfasce";
 import { Convenio } from "../../../models/Convenio";
+import logger from "../../../utils/logger";
 
 export const validarAsignacionCodigo = async (
   datos: DatosIngresados,
@@ -59,7 +60,8 @@ export const validarAsignacionCodigo = async (
     }
     return asignacion.dataValues.codigo;
   } catch (error) {
-    console.log("Error encontrando codigos", error);
+    logger.error("Error encontrando codigos: " + error);
+    
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

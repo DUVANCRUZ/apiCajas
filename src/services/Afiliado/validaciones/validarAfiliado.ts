@@ -4,6 +4,7 @@ import { ErrorI } from "../../../interfaces/error.interfasce";
 import { WebServiceI } from "../../../interfaces/webService.interface";
 import { Afiliado } from "../../../models/Afiliado";
 import { crearAfiliado } from "./crearAfiliado";
+import logger from "../../../utils/logger";
 
 export const validarAfiliado = async (
   datos: DatosIngresados,
@@ -23,7 +24,8 @@ export const validarAfiliado = async (
     // console.log("From_AF", afiliado.dataValues);
     return afiliado.dataValues;
   } catch (error: ErrorI | any) {
-    console.log("Error creando el afiliado", error);
+    logger.error("Error creando el afiliado: " + error)
+    
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

@@ -7,6 +7,8 @@ import { Sede } from "../models/Sede";
 import { UserRoles } from "../models/UserRoles";
 import { Users } from "../models/Users";
 import { TipoDocumentoIdentidad } from "../models/TipoDocumentoIdentidad";
+import logger from "../utils/logger";
+
 
 Afiliado.belongsTo(TipoDocumentoIdentidad, {
   foreignKey: "tipo_documento",
@@ -56,8 +58,8 @@ Users.belongsTo(UserRoles, {
 export async function modelRelation(): Promise<void> {
   try {
     await database.sync();
-    console.log("Database synchronized successfully");
+    logger.info("Database synchronized successfully");
   } catch (error) {
-    console.error("Error synchronizing the database:", error);
+    logger.error("Error synchronizing the database: " + error);
   }
 }

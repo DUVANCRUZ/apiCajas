@@ -10,6 +10,8 @@ import { modelRelation } from "./connections/modelRelation";
 import { router } from "./routes/index.routes";
 import { ProjectInfoI } from "./interfaces/projectInfo.interface";
 import swaggerSetup from "./documentation/Swagger";
+import logger from "./utils/logger";
+
 
 export class App {
   private app: Application;
@@ -52,12 +54,12 @@ export class App {
 
   listen(): void {
     this.app.listen(this.app.get("port"));
-    console.log("Server in port", this.app.get("port"));
+    logger.info("Server in port:" + this.app.get("port"));
   }
 
   private async dbConection(): Promise<void> {
     await database.authenticate();
-    console.log("Database conected");
+    logger.info("Database conected");
   }
 
   private relationSync(): void {

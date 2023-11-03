@@ -1,6 +1,7 @@
 import { Sede } from "../../../models/Sede";
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { ErrorI } from "../../../interfaces/error.interfasce";
+import logger from "../../../utils/logger";
 
 export const validarSede = async (datos: DatosIngresados): Promise<number> => {
   try {
@@ -12,7 +13,7 @@ export const validarSede = async (datos: DatosIngresados): Promise<number> => {
     }
     return sede.dataValues.id_location;
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     const responseError: ErrorI = {
       error: true,
       message: `${error}`,

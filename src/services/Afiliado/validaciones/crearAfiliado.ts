@@ -1,6 +1,7 @@
 import { DatosIngresados } from "../../../interfaces/datos.interface";
 import { WebServiceI } from "../../../interfaces/webService.interface";
 import { Afiliado } from "../../../models/Afiliado";
+import logger from "../../../utils/logger";
 
 export const crearAfiliado = async (
   datos: DatosIngresados,
@@ -27,6 +28,7 @@ export const crearAfiliado = async (
     });
     return afiliado.dataValues;
   } catch (error) {
+    logger.error(error)
     throw new Error("Error al buscar convenios");
   }
 };
